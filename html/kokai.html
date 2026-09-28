@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOKAI — KOKA</title>
+<link rel="icon" href="../assets/images/icons/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/internal.css">
+<link rel="stylesheet" href="../css/kokai.css">
+</head>
+<body class="halaman-app">
+
+  <header class="topbar">
+    <div class="container">
+      <a class="btn-kembali" href="dashboard.html">←</a>
+      <div>
+        <h1>KOKAI 🤖</h1>
+        <div class="topbar-sub">Asisten AI untuk belajar koding &amp; AI</div>
+      </div>
+      <div class="kanan-topbar">
+        <span class="badge badge-oren" id="kokai-kuota" hidden>🎟️ Sisa: -</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container halaman-isi kokai-wrap">
+
+    <!-- Sedang memeriksa -->
+    <section class="kartu kokai-panel" id="kokai-memuat">
+      <img src="../assets/images/mascot/maskot-kepala.png" alt="" class="kokai-maskot maskot-mengambang">
+      <p>KOKAI sedang bersiap…</p>
+    </section>
+
+    <!-- Belum diaktifkan -->
+    <section class="kartu kokai-panel" id="kokai-terkunci" hidden>
+      <img src="../assets/images/mascot/maskot-berdiri.png" alt="" class="kokai-maskot maskot-mengambang">
+      <h2>KOKAI belum aktif</h2>
+      <p>Asisten AI ini akan hadir di Semester 2. Sabar dulu ya, sambil belajar materinya! ✨</p>
+      <a class="btn btn-ungu" href="dashboard.html">Kembali ke Dashboard</a>
+    </section>
+
+    <!-- Gagal terhubung -->
+    <section class="kartu kokai-panel" id="kokai-gagal" hidden>
+      <img src="../assets/images/mascot/maskot-kepala.png" alt="" class="kokai-maskot">
+      <h2>Belum bisa terhubung</h2>
+      <p>Periksa internetmu, lalu coba lagi ya.</p>
+      <button class="btn btn-oren" id="kokai-coba-lagi" type="button">Coba lagi</button>
+    </section>
+
+    <!-- Chat -->
+    <section class="kartu kokai-chat" id="kokai-chat" hidden>
+      <div class="kokai-daftar" id="kokai-daftar" aria-live="polite"></div>
+
+      <div class="kokai-saran" id="kokai-saran"></div>
+
+      <div class="kokai-bar">
+        <textarea id="kokai-input" class="input-teks" rows="2" maxlength="300"
+                  placeholder="Tulis pertanyaanmu tentang koding atau AI…"></textarea>
+        <div class="kokai-bar-bawah">
+          <span class="kokai-hitung" id="kokai-hitung">0/300</span>
+          <button class="btn btn-oren btn-sm" id="kokai-kirim" type="button">Kirim ✈️</button>
+        </div>
+      </div>
+      <p class="kokai-catatan">KOKAI adalah AI, jawabannya bisa keliru. Tanyakan ke gurumu kalau ragu.</p>
+    </section>
+
+  </main>
+
+<script src="../js/app.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/kokai.js"></script>
+<script src="../js/audio.js"></script>
+</body>
+</html>
