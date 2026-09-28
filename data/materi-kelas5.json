@@ -282,7 +282,7 @@
         {
           "tipe": "info",
           "judul": "💡 Apa itu Literasi Digital?",
-          "teks": "Literasi digital adalah kemampuan memahami, menggunakan, dan memanfaatkan teknologi digital secara bijak dan bertanggung jawab, misalnya komputer, internet, dan gawai (gadget)"
+          "teks": "Literasi digital adalah kemampuan memahami, menggunakan, dan memanfaatkan teknologi digital secara bijak dan bertanggung jawab, misalnya komputer, internet, dan gawai (gadget)."
         },
         {
           "tipe": "judul",
@@ -355,8 +355,29 @@
         },
         {
           "tipe": "info",
-          "judul": "💡 Sistem Komputer",
+          "judul": "Sistem Komputer",
           "teks": "Sistem komputer adalah sekumpulan komponen yang saling bekerja sama untuk menerima, mengolah, menyimpan, dan menghasilkan informasi."
+        },
+        {
+          "tipe": "paragraf",
+          "teks": "bagian-bagian sistem komputer, antara lain:"
+        },
+        {
+          "tipe": "gambar",
+          "src": "images/materi/k5-bab3-3.png",
+          "keterangan": "Bagian-bagian komputer dan fungsinya"
+        },
+        {
+          "tipe": "paragraf",
+          "teks": "Manfaat Sistem Komputer, antara lain:"
+        },
+        { 
+          "tipe": "list",
+          "item": [
+          "Menghemat waktu sehingga dapat meningkatkan kemampuan untuk menghasilkan sesuatu",
+          "Menyempurnakan kemampuan pengelolaan informasi sehingga cepat tersedia",
+          "Meningkatkan konektivitas dan komunikasi"
+          ]
         },
         {
           "tipe": "paragraf",
@@ -364,7 +385,7 @@
         },
         {
           "tipe": "gambar",
-          "src": "images/materi/k5-bab3-komputer.png",
+          "src": "images/materi/k5-bab3-2.png",
           "keterangan": "Bagian-bagian komputer dan fungsinya"
         },
         {
