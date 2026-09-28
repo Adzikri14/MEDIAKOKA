@@ -153,6 +153,22 @@ body.halaman-app > .footer-koka {
 .kartu-aksi-kecil h4 { margin: 0; font-size: 14px; color: var(--putih); }
 .kartu-aksi-kecil p { margin: 0; font-size: 11px; color: rgba(255,255,255,0.85); }
 
+/* Kotak KOKAI: terkunci (bawaan) vs aktif */
+.kartu-aksi-kecil.kartu-terkunci {
+  opacity: .78;
+  cursor: not-allowed;
+  border-style: dashed;
+}
+.kartu-aksi-kecil.kartu-terkunci:hover {
+  transform: none;
+  background: rgba(255,255,255,0.16);
+}
+.kartu-aksi-kecil.kartu-terkunci .ikon { filter: grayscale(.7); }
+.kartu-aksi-kecil.kartu-kokai-aktif {
+  border-color: var(--kuning-500);
+  background: rgba(255,255,255,0.26);
+}
+
 .menu-utama {
   margin-top: 30px;
 }
