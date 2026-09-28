@@ -29,8 +29,8 @@
  *    pada file js/config.js di proyek KOKA.
  */
 
-const SHEET_ID = "GANTI_DENGAN_ID_SPREADSHEET_ANDA";
-const DRIVE_FOLDER_ID = "GANTI_DENGAN_ID_FOLDER_DRIVE_ANDA"; // hanya dipakai untuk upload file proyek
+const SHEET_ID = "1NV4av7tC8Xo1uWcSNqyRzbbmurTD4djq16V0Y8og76c";
+const DRIVE_FOLDER_ID = "1Gr9Z9n6YHi2zJfM4crpFgrp4HorGp8do"; // hanya dipakai untuk upload file proyek
 
 /**
  * doGet — dipakai website untuk menanyakan "apakah KOKAI sudah aktif?"
