@@ -92,6 +92,13 @@ Kedua halaman ini punya **2 versi siap pakai** — cukup tambah/hapus satu kata 
 4. **Deploy > New deployment > Web app** (Execute as: *Me*, Who has access: *Anyone*).
 5. Salin URL Web App yang diberikan Google, tempel ke `js/config.js` pada `APPS_SCRIPT_URL`.
 
+## 🤖 KOKAI — Asisten AI (Semester 2)
+Chatbot belajar untuk siswa, memakai OpenAI lewat Google Apps Script (kunci API **tidak** ada di website).
+- **Saklar utama**: Script Properties `KOKAI_AKTIF` di Apps Script (`tidak` = terkunci, `ya` = aktif). Tidak perlu deploy ulang.
+- Kotak KOKAI di Dashboard (setelah CP-TP) terkunci sampai diaktifkan; halaman: `html/kokai.html`, `js/kokai.js`, `css/kokai.css`.
+- Jatah per siswa/hari, batas panjang pertanyaan/jawaban, dan model diatur di Script Properties (lihat komentar di `apps-script/Code.gs`).
+- Riwayat tanya-jawab & jumlah token tercatat di sheet **KOKAI**.
+
 ## 🚀 Cara Publikasikan (GitHub Pages, contoh gratis)
 1. Buat repository baru di GitHub, upload seluruh isi folder `koka/`.
 2. Buka **Settings > Pages**, pilih branch `main` dan folder `/ (root)`.
