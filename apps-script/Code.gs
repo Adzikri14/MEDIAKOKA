@@ -29,7 +29,7 @@
  *    pada file js/config.js di proyek KOKA.
  */
 
-const SHEET_ID = "1NV4av7tC8Xo1uWcSNqyRzbbmurTD4djq16V0Y8og76c";
+cconst SHEET_ID = "1NV4av7tC8Xo1uWcSNqyRzbbmurTD4djq16V0Y8og76c";
 const DRIVE_FOLDER_ID = "1Gr9Z9n6YHi2zJfM4crpFgrp4HorGp8do"; // hanya dipakai untuk upload file proyek
 
 /**
@@ -206,6 +206,14 @@ function ujiCobaKirimProyekLink() {
                              angka ini (bawaan 12000)
    KOKAI_EMAIL               (opsional) email penerima peringatan; jika
                              kosong dipakai email pemilik skrip
+   KOKAI_KODE_JURI           (opsional) kode rahasia untuk juri/penguji, min.
+                             6 karakter. Pemegang kode bisa memakai KOKAI
+                             walau KOKAI_AKTIF = tidak (lihat PANDUAN).
+                             Kosongkan untuk mematikan jalur juri.
+   KOKAI_BATAS_JURI          jatah pertanyaan per nama juri per hari
+                             (bawaan 20)
+   KOKAI_BATAS_TOTAL_JURI    batas semua pemakaian jalur juri per hari
+                             (bawaan 100; pengaman biaya)
 
    Data tercatat di sheet "KOKAI" (riwayat tanya-jawab + jumlah token) dan
    "KOKAI_Kuota" (hitungan jatah harian; jangan diubah manual).
@@ -219,7 +227,9 @@ const KOKAI_BAWAAN = {
   KOKAI_BATAS_TOTAL_HARIAN: "1000",
   KOKAI_MAKS_TANYA: "300",
   KOKAI_MAKS_JAWAB: "200",
-  KOKAI_BATAS_PERINGATAN: "12000"
+  KOKAI_BATAS_PERINGATAN: "12000",
+  KOKAI_BATAS_JURI: "20",
+  KOKAI_BATAS_TOTAL_JURI: "100"
 };
 
 function jsonOut(obj) {
@@ -252,6 +262,16 @@ function kokaiKunci(nama, kelas) {
     .replace(/[^a-z0-9\s]/g, "").replace(/\s+/g, " ").trim();
   return n + "|" + String(kelas || "").trim();
 }
+/** Benar hanya jika kode dari pengunjung sama dengan KOKAI_KODE_JURI (min. 6 karakter). */
+function kokaiModeJuri(kode) {
+  const k = String(kode || "").trim();
+  const asli = String(PropertiesService.getScriptProperties().getProperty("KOKAI_KODE_JURI") || "").trim();
+  return k.length >= 6 && asli.length >= 6 && k === asli;
+}
+/** Jatah juri dicatat terpisah dari jatah siswa (nama "Juri" milik siswa tidak bentrok). */
+function kokaiKunciMode(nama, kelas, juri) {
+  return (juri ? "juri:" : "") + kokaiKunci(nama, kelas);
+}
 /** Cegah teks siswa dibaca sebagai rumus oleh Google Sheets */
 function kokaiAmanSel(t) {
   const s = String(t === undefined || t === null ? "" : t);
@@ -261,15 +281,18 @@ function kokaiAmanSel(t) {
 /* ---------------- Status (dipanggil lewat doGet) ---------------- */
 
 function kokaiStatus(p) {
-  const aktif = kokaiAktif();
+  const juri = kokaiModeJuri(p.kode);
+  const aktif = juri || kokaiAktif();
+  const batas = kokaiAngka(juri ? "KOKAI_BATAS_JURI" : "KOKAI_BATAS_HARIAN");
   const hasil = {
     status: "ok",
     aktif: aktif,
-    batas: kokaiAngka("KOKAI_BATAS_HARIAN"),
+    mode: juri ? "juri" : "siswa",
+    batas: batas,
     maksTanya: kokaiAngka("KOKAI_MAKS_TANYA")
   };
   if (aktif && p.nama && p.kelas) {
-    hasil.sisa = kokaiSisa(p.nama, p.kelas);
+    hasil.sisa = kokaiSisa(p.nama, p.kelas, batas, juri);
   }
   return jsonOut(hasil);
 }
@@ -287,10 +310,9 @@ function kokaiSheetKuota() {
   return sheet;
 }
 
-function kokaiSisa(nama, kelas) {
-  const batas = kokaiAngka("KOKAI_BATAS_HARIAN");
+function kokaiSisa(nama, kelas, batas, juri) {
   const hari = kokaiHariIni();
-  const kunci = kokaiKunci(nama, kelas);
+  const kunci = kokaiKunciMode(nama, kelas, juri);
   const data = kokaiSheetKuota().getDataRange().getValues();
   for (let i = 1; i < data.length; i++) {
     if (String(data[i][0]) === kunci) {
@@ -302,15 +324,15 @@ function kokaiSisa(nama, kelas) {
 }
 
 /** Ambil 1 jatah SEBELUM memanggil OpenAI (kunci hanya sebentar). */
-function kokaiAmbilJatah(nama, kelas) {
+function kokaiAmbilJatah(nama, kelas, batas, juri) {
   const lock = LockService.getScriptLock();
   lock.waitLock(15000);
   try {
     const sheet = kokaiSheetKuota();
     const hari = kokaiHariIni();
-    const batas = kokaiAngka("KOKAI_BATAS_HARIAN");
-    const batasTotal = kokaiAngka("KOKAI_BATAS_TOTAL_HARIAN");
-    const kunci = kokaiKunci(nama, kelas);
+    const batasTotal = kokaiAngka(juri ? "KOKAI_BATAS_TOTAL_JURI" : "KOKAI_BATAS_TOTAL_HARIAN");
+    const kunciTotal = juri ? "__TOTAL_JURI__" : "__TOTAL__";
+    const kunci = kokaiKunciMode(nama, kelas, juri);
     const data = sheet.getDataRange().getValues();
 
     let barisSiswa = -1, jumlahSiswa = 0, barisTotal = -1, jumlahTotal = 0;
@@ -318,18 +340,18 @@ function kokaiAmbilJatah(nama, kelas) {
       const k = String(data[i][0]);
       const hariIni = kokaiTeksTanggal(data[i][1]) === hari;
       if (k === kunci) { barisSiswa = i + 1; jumlahSiswa = hariIni ? (Number(data[i][2]) || 0) : 0; }
-      else if (k === "__TOTAL__") { barisTotal = i + 1; jumlahTotal = hariIni ? (Number(data[i][2]) || 0) : 0; }
+      else if (k === kunciTotal) { barisTotal = i + 1; jumlahTotal = hariIni ? (Number(data[i][2]) || 0) : 0; }
     }
 
     if (jumlahSiswa >= batas) return { ok: false, alasan: "batas" };
     if (jumlahTotal >= batasTotal) return { ok: false, alasan: "total" };
 
     jumlahSiswa++;
-    jumlahTotal++;
     if (barisSiswa > 0) sheet.getRange(barisSiswa, 2, 1, 2).setValues([[hari, jumlahSiswa]]);
     else sheet.appendRow([kunci, hari, jumlahSiswa, kokaiAmanSel(nama), kelas]);
+    jumlahTotal++; // jalur juri punya hitungan total sendiri, terpisah dari siswa
     if (barisTotal > 0) sheet.getRange(barisTotal, 2, 1, 2).setValues([[hari, jumlahTotal]]);
-    else sheet.appendRow(["__TOTAL__", hari, jumlahTotal, "", ""]);
+    else sheet.appendRow([kunciTotal, hari, jumlahTotal, "", ""]);
 
     return { ok: true, sisa: batas - jumlahSiswa };
   } finally {
@@ -338,17 +360,17 @@ function kokaiAmbilJatah(nama, kelas) {
 }
 
 /** Kembalikan jatah bila OpenAI gagal (siswa tidak dirugikan). */
-function kokaiKembalikanJatah(nama, kelas) {
+function kokaiKembalikanJatah(nama, kelas, juri) {
   const lock = LockService.getScriptLock();
   lock.waitLock(15000);
   try {
     const sheet = kokaiSheetKuota();
     const hari = kokaiHariIni();
-    const kunci = kokaiKunci(nama, kelas);
+    const kunci = kokaiKunciMode(nama, kelas, juri);
     const data = sheet.getDataRange().getValues();
     for (let i = 1; i < data.length; i++) {
       const k = String(data[i][0]);
-      if ((k === kunci || k === "__TOTAL__") && kokaiTeksTanggal(data[i][1]) === hari) {
+      if ((k === kunci || k === (juri ? "__TOTAL_JURI__" : "__TOTAL__")) && kokaiTeksTanggal(data[i][1]) === hari) {
         const j = Math.max(0, (Number(data[i][2]) || 0) - 1);
         sheet.getRange(i + 1, 3).setValue(j);
       }
@@ -478,7 +500,8 @@ function kokaiHitungTotal() {
  * uji = true hanya dipakai dari editor (ujiCobaKOKAI): melewati saklar KOKAI_AKTIF.
  */
 function kokaiProses(data, uji) {
-  if (!uji && !kokaiAktif()) {
+  const juri = kokaiModeJuri(data.kode);
+  if (!uji && !juri && !kokaiAktif()) {
     return jsonOut({ status: "nonaktif", pesan: "KOKAI belum aktif. Tunggu semester 2 ya! 😊" });
   }
 
@@ -505,7 +528,8 @@ function kokaiProses(data, uji) {
     return jsonOut({ status: "error", pesan: "KOKAI sedang istirahat. Coba lagi nanti ya 🙏" });
   }
 
-  const jatah = kokaiAmbilJatah(nama, kelas);
+  const batasJatah = kokaiAngka(juri ? "KOKAI_BATAS_JURI" : "KOKAI_BATAS_HARIAN");
+  const jatah = kokaiAmbilJatah(nama, kelas, batasJatah, juri);
   if (!jatah.ok) {
     if (jatah.alasan === "batas") {
       return jsonOut({ status: "batas", sisa: 0, pesan: "Jatah pertanyaanmu hari ini sudah habis. Coba lagi besok ya! 🌙" });
@@ -524,8 +548,8 @@ function kokaiProses(data, uji) {
   }
 
   if (!hasil.ok) {
-    kokaiKembalikanJatah(nama, kelas);
-    kokaiCatat(nama, kelas, pertanyaan, "", "gagal: " + hasil.jenis + " " + (hasil.detail || ""));
+    kokaiKembalikanJatah(nama, kelas, juri);
+    kokaiCatat(nama, kelas, pertanyaan, "", (juri ? "[juri] " : "") + "gagal: " + hasil.jenis + " " + (hasil.detail || ""));
     if (hasil.jenis === "saldo") {
       kokaiKirimPeringatan("saldo", "Saldo OpenAI habis", "Permintaan ditolak karena saldo/kuota habis. Silakan top up di platform.openai.com (Billing). Detail: " + hasil.detail);
     } else if (hasil.jenis === "kunci") {
@@ -537,8 +561,8 @@ function kokaiProses(data, uji) {
     return jsonOut({ status: hasil.jenis === "sibuk" ? "sibuk" : "error", pesan: pesanSiswa });
   }
 
-  kokaiCatat(nama, kelas, pertanyaan, hasil.teks, "ok", hasil.tokenMasuk, hasil.tokenKeluar);
-  kokaiHitungTotal();
+  kokaiCatat(nama, kelas, pertanyaan, hasil.teks, juri ? "ok (juri)" : "ok", hasil.tokenMasuk, hasil.tokenKeluar);
+  if (!juri) kokaiHitungTotal();
   return jsonOut({ status: "ok", jawaban: hasil.teks, sisa: jatah.sisa });
 }
 
