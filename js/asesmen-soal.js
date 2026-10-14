@@ -200,7 +200,16 @@ function renderBenarSalah(wadah, soal) {
 }
 
 function renderMenjodohkan(wadah, soal) {
-  const opsiKanan = soal.pasangan.map(p => p.kanan);
+  // Acak urutan pilihan (sekali per soal) supaya urutan jawaban tidak sama dengan kunci
+  if (!soal._opsiAcak) {
+    const arr = soal.pasangan.map(p => p.kanan);
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    soal._opsiAcak = arr;
+  }
+  const opsiKanan = soal._opsiAcak;
   wadah.innerHTML = `
     <div class="daftar-menjodohkan">
       ${soal.pasangan.map((p, i) => `
