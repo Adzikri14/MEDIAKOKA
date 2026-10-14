@@ -46,6 +46,17 @@ document.getElementById('form-sumatif').addEventListener('submit', async functio
     return;
   }
 
+  // Pastikan soal untuk bab & paket ini sudah tersedia di bank soal
+  const bank = await KOKA.ambilJSON(`soal-sumatif-kelas${sesiAsesmen.kelas}.json`);
+  const babData = bank.bab.find(b => b.babId === babCocok);
+  const paketSoal = babData && babData.paket ? babData.paket[paketCocok] : null;
+  if (!paketSoal || paketSoal.length === 0) {
+    errBox.textContent = `Soal Paket ${paketCocok} untuk bab ini belum tersedia. Hubungi gurumu.`;
+    errBox.style.display = 'block';
+    return;
+  }
+  errBox.textContent = 'Kode unik tidak ditemukan. Periksa kembali penulisannya.';
+
   const dataSumatif = {
     nama: sesiAsesmen.nama,
     kelas: sesiAsesmen.kelas,

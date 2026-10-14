@@ -28,13 +28,43 @@ let indexSoalAktif = 0;
 let waktuTersisaDetik = 0;
 let timerInterval = null;
 
+/* Normalisasi skema soal: data boleh memakai nama kunci "jawaban"/"kunci" (pg),
+   "jawabanBenar"/"kunci" (pgk), dan true/false atau "benar"/"salah" (benar-salah).
+   Semua diseragamkan agar penilaian selalu benar, apa pun cara menulis JSON-nya. */
+function keBoolBenarSalah(v) {
+  if (typeof v === 'boolean') return v;
+  const t = String(v).trim().toLowerCase();
+  return t === 'benar' || t === 'b' || t === 'true';
+}
+function normalisasiSoal(soal) {
+  if (soal.jenis === 'pg') {
+    const k = soal.jawaban !== undefined ? soal.jawaban : soal.kunci;
+    soal.jawaban = parseInt(k, 10);
+  } else if (soal.jenis === 'pgk') {
+    const k = soal.jawabanBenar !== undefined ? soal.jawabanBenar : soal.kunci;
+    soal.jawabanBenar = (Array.isArray(k) ? k : []).map(x => parseInt(x, 10));
+  } else if (soal.jenis === 'benarsalah') {
+    soal.pernyataan.forEach(p => {
+      p.jawaban = keBoolBenarSalah(p.jawaban !== undefined ? p.jawaban : p.kunci);
+    });
+  }
+  return soal;
+}
+
 async function muatSoalSumatif() {
   document.getElementById('hud-nama-siswa').textContent = sumatifAktif.nama;
   document.getElementById('hud-detail-siswa').textContent = `Kelas ${sumatifAktif.kelas} • No. ${sumatifAktif.presensi} • ${sumatifAktif.babJudul} • Paket ${sumatifAktif.paket}`;
 
   const bank = await KOKA.ambilJSON(`soal-sumatif-kelas${sumatifAktif.kelas}.json`);
   const babData = bank.bab.find(b => b.babId === sumatifAktif.babId);
-  bankSoalAktif = babData.paket[sumatifAktif.paket];
+  const paketSoal = babData && babData.paket ? babData.paket[sumatifAktif.paket] : null;
+  if (!paketSoal || paketSoal.length === 0) {
+    alert('Soal untuk bab/paket ini belum tersedia. Hubungi gurumu.');
+    sessionStorage.removeItem('koka_sumatif_aktif');
+    window.location.href = 'asesmen.html';
+    return;
+  }
+  bankSoalAktif = paketSoal.map(normalisasiSoal);
   waktuTersisaDetik = bank.petunjukUmum.durasiMenit * 60;
 
   jawabanTerpilih = bankSoalAktif.map(soal => {
@@ -239,7 +269,7 @@ function nilaiSoal(soal, jawaban) {
   }
   if (soal.jenis === 'pgk') {
     const sama = jawaban.length === soal.jawabanBenar.length &&
-      jawaban.slice().sort().join(',') === soal.jawabanBenar.slice().sort().join(',');
+      jawaban.slice().sort((a, b) => a - b).join(',') === soal.jawabanBenar.slice().sort((a, b) => a - b).join(',');
     return sama ? soal.bobot : 0;
   }
   if (soal.jenis === 'benarsalah') {
