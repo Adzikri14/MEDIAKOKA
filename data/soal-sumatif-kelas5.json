@@ -531,13 +531,13 @@
           {
             "id": "s6",
             "jenis": "pg",
-            "teks": "Fitur Bold pada Microsoft Word digunakan untuk ....",
+            "teks": "Untuk memilih teks kita ketuk pintasan ....",
             "gambar": "",
             "pilihan": [
-              "Memiringkan tulisan",
-              "Menebalkan tulisan",
-              "Menggarisbawahi tulisan",
-              "Menghapus tulisan"
+              "Ctrl + A",
+              "Ctrl + J",
+              "Ctrl + V",
+              "Ctrl + C"
             ],
             "jawaban": 1,
             "bobot": 2
@@ -601,13 +601,13 @@
           {
             "id": "s11",
             "jenis": "pgk",
-            "teks": "Berikut ini yang termasuk fungsi program pengolah kata adalah .... (Pilih 2 jawaban yang benar!)",
+            "teks": "Berikut ini yang termasuk menu pada tab insert yang berfungsi menyisipkan objek! (Pilih 2 jawaban yang benar!)",
             "gambar": "",
             "pilihan": [
-              "Membuat surat",
-              "Mengedit dokumen teks",
-              "Menghitung jumlah data secara otomatis",
-              "Membuat animasi karakter"
+              "Tabel",
+              "Chart",
+              "Size",
+              "Replace"
             ],
             "jawabanBenar": [
               0,
@@ -786,19 +786,19 @@
           {
             "id": "s21",
             "jenis": "menjodohkan",
-            "teks": "Program Pengolah Kata: jodohkan setiap istilah dengan penjelasan yang tepat!",
+            "teks": "Program Pengolah Kata pada menu insert dalam menyisipkan objek: jodohkan setiap istilah dengan penjelasan yang tepat!",
             "pasangan": [
               {
-                "kiri": "Microsoft Word",
-                "kanan": "Membuat dan mengedit dokumen teks"
+                "kiri": "Shapes",
+                "kanan": "Menyisipkan bangun datar atau menggambar sendiri"
               },
               {
-                "kiri": "Bold",
-                "kanan": "Menebalkan tulisan"
+                "kiri": "Chart",
+                "kanan": "Menyisipkan diagram"
               },
               {
-                "kiri": "Italic",
-                "kanan": "Memiringkan tulisan"
+                "kiri": "Picture",
+                "kanan": "Menyisipkan gambar dari file komputer atau komputer"
               }
             ],
             "bobot": 6
