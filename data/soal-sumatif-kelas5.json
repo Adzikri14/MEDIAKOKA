@@ -888,87 +888,372 @@
           {
             "id": "s1",
             "jenis": "pg",
-            "teks": "Perintah yang membuat program mengambil keputusan berbeda tergantung suatu syarat disebut...",
+            "teks": "Program yang cocok digunakan untuk mengetik surat dan laporan adalah ....",
             "gambar": "",
-            "pilihan": [
-              "Variabel",
-              "Perulangan",
-              "Pengondisian",
-              "Panggung"
-            ],
-            "jawaban": 2,
-            "bobot": 1
+            "pilihan": ["Microsoft Excel", "Microsoft Word", "Paint", "Calculator"],
+            "jawaban": 1,
+            "bobot": 2
           },
           {
             "id": "s2",
             "jenis": "pg",
-            "teks": "Tempat menampilkan hasil program yang dijalankan di Scratch disebut...",
+            "teks": "Program yang dapat digunakan untuk membuat daftar nilai siswa dan menghitung rata-ratanya adalah ....",
             "gambar": "",
-            "pilihan": [
-              "Panggung (stage)",
-              "Area skrip",
-              "Sprite",
-              "Variabel"
-            ],
-            "jawaban": 0,
-            "bobot": 1
+            "pilihan": ["Notepad", "Paint", "Microsoft Excel", "Microsoft Word"],
+            "jawaban": 2,
+            "bobot": 2
           },
           {
             "id": "s3",
-            "jenis": "pgk",
-            "teks": "Berikut ini bagian utama tampilan aplikasi Scratch adalah... (pilih 2 jawaban)",
+            "jenis": "pg",
+            "teks": "Langkah-langkah berurutan yang disusun untuk memecahkan suatu masalah disebut ....",
             "gambar": "",
-            "pilihan": [
-              "Panggung (stage)",
-              "Dapur",
-              "Blok kode",
-              "Kamar tidur"
-            ],
-            "jawabanBenar": [
-              0,
-              2
-            ],
+            "pilihan": ["Data", "Algoritma", "Folder", "Dokumen"],
+            "jawaban": 1,
             "bobot": 2
           },
           {
             "id": "s4",
-            "jenis": "benarsalah",
-            "teks": "Perhatikan pernyataan berikut tentang pemrograman:",
-            "pernyataan": [
-              {
-                "teks": "Sebelum membuat program, kita perlu menyusun algoritma terlebih dahulu.",
-                "jawaban": true
-              },
-              {
-                "teks": "Blok kode di Scratch hanya berwarna satu warna saja.",
-                "jawaban": false
-              },
-              {
-                "teks": "Pengondisian membuat program mengambil keputusan berbeda tergantung syarat.",
-                "jawaban": true
-              }
+            "jenis": "pg",
+            "teks": "Dalam pemrograman Scratch, blok perintah \"turn 15 degrees\" berfungsi untuk ....",
+            "gambar": "",
+            "pilihan": [
+              "Memutar karakter sebesar 15 derajat",
+              "Mengubah warna karakter",
+              "Menghapus karakter",
+              "Menghentikan program"
             ],
-            "bobot": 3
+            "jawaban": 0,
+            "bobot": 2
           },
           {
             "id": "s5",
-            "jenis": "menjodohkan",
-            "teks": "Jodohkan istilah berikut dengan penjelasannya:",
-            "pasangan": [
+            "jenis": "pg",
+            "teks": "Agar program dalam Scratch mulai berjalan saat bendera hijau diklik, blok yang digunakan sebagai pemicu adalah ....",
+            "gambar": "",
+            "pilihan": [
+              "Say Hello!",
+              "Move 10 steps",
+              "Turn 15 degrees",
+              "When green flag clicked"
+            ],
+            "jawaban": 3,
+            "bobot": 2
+          },
+          {
+            "id": "s6",
+            "jenis": "pg",
+            "teks": "Pintasan keyboard yang digunakan untuk menyalin teks adalah ....",
+            "gambar": "",
+            "pilihan": ["Ctrl + V", "Ctrl + C", "Ctrl + A", "Ctrl + Z"],
+            "jawaban": 1,
+            "bobot": 2
+          },
+          {
+            "id": "s7",
+            "jenis": "pg",
+            "teks": "Dalam Microsoft Excel, alamat sel yang berada pada kolom B dan baris ke-3 ditulis ....",
+            "gambar": "",
+            "pilihan": ["B3", "3B", "B-3", "C2"],
+            "jawaban": 0,
+            "bobot": 2
+          },
+          {
+            "id": "s8",
+            "jenis": "pg",
+            "teks": "Dalam pemrograman, perintah yang membuat suatu tindakan dilakukan berulang-ulang disebut ....",
+            "gambar": "",
+            "pilihan": ["Selection", "Sequence", "Input", "Looping"],
+            "jawaban": 3,
+            "bobot": 2
+          },
+          {
+            "id": "s9",
+            "jenis": "pg",
+            "teks": "Blok Forever dalam Scratch berfungsi untuk ....",
+            "gambar": "",
+            "pilihan": [
+              "Mengulang perintah terus-menerus",
+              "Menghapus karakter",
+              "Mengubah latar belakang",
+              "Menghentikan semua program"
+            ],
+            "jawaban": 0,
+            "bobot": 2
+          },
+          {
+            "id": "s10",
+            "jenis": "pg",
+            "teks": "Sebuah program memeriksa nilai siswa: jika nilai lebih dari atau sama dengan 75, program menampilkan tulisan \"Lulus\". Konsep ini disebut ....",
+            "gambar": "",
+            "pilihan": ["Percabangan", "Perulangan", "Pengolah kata", "Pengolah data"],
+            "jawaban": 0,
+            "bobot": 2
+          },
+          {
+            "id": "s11",
+            "jenis": "pgk",
+            "teks": "Berikut ini yang termasuk menu pada tab Insert yang berfungsi menyisipkan objek! (Pilih 2 jawaban yang benar!)",
+            "gambar": "",
+            "pilihan": ["Picture", "Shapes", "Font", "Find"],
+            "jawabanBenar": [0, 1],
+            "bobot": 4
+          },
+          {
+            "id": "s12",
+            "jenis": "pgk",
+            "teks": "Perhatikan pernyataan berikut! Pilih 2 pernyataan yang benar.",
+            "gambar": "",
+            "pilihan": [
+              "Microsoft Excel dapat digunakan untuk mengolah data dalam bentuk tabel.",
+              "Microsoft Excel hanya digunakan untuk mengetik surat.",
+              "Microsoft Excel dapat digunakan untuk membuat grafik dari data.",
+              "Microsoft Excel digunakan khusus untuk mengedit foto."
+            ],
+            "jawabanBenar": [0, 2],
+            "bobot": 4
+          },
+          {
+            "id": "s13",
+            "jenis": "pgk",
+            "teks": "Manakah pernyataan yang benar tentang algoritma? (Pilih 2 jawaban yang benar!)",
+            "gambar": "",
+            "pilihan": [
+              "Algoritma disusun secara berurutan agar masalah dapat diselesaikan.",
+              "Algoritma hanya boleh ditulis oleh programmer profesional.",
+              "Langkah-langkah membuat teh manis dapat dijadikan contoh algoritma.",
+              "Algoritma tidak boleh memiliki urutan langkah."
+            ],
+            "jawabanBenar": [0, 2],
+            "bobot": 4
+          },
+          {
+            "id": "s14",
+            "jenis": "pgk",
+            "teks": "Berikut ini yang merupakan fungsi blok perintah dalam Scratch adalah .... (Pilih 2 jawaban yang benar!)",
+            "gambar": "",
+            "pilihan": [
+              "Blok wait 1 seconds digunakan untuk mengganti latar belakang.",
+              "Blok wait 1 seconds digunakan untuk memberi jeda waktu.",
+              "Blok say Hello! digunakan untuk menampilkan pesan.",
+              "Blok say Hello! digunakan untuk menghapus karakter."
+            ],
+            "jawabanBenar": [1, 2],
+            "bobot": 4
+          },
+          {
+            "id": "s15",
+            "jenis": "pgk",
+            "teks": "Perhatikan pernyataan berikut tentang pemrograman! Pilih 2 pernyataan yang benar.",
+            "gambar": "",
+            "pilihan": [
+              "Program komputer terdiri dari instruksi yang disusun secara berurutan.",
+              "Program tidak perlu diuji coba setelah dibuat.",
+              "Kesalahan pada program (bug) perlu ditemukan dan diperbaiki.",
+              "Program komputer hanya dapat dibuat oleh orang dewasa."
+            ],
+            "jawabanBenar": [0, 2],
+            "bobot": 4
+          },
+          {
+            "id": "s16",
+            "jenis": "benarsalah",
+            "teks": "Program Pengolah Kata: tentukan apakah setiap pernyataan berikut Benar atau Salah!",
+            "pernyataan": [
               {
-                "kiri": "Panggung (stage)",
-                "kanan": "Tempat menampilkan hasil program"
+                "teks": "Microsoft Word dapat digunakan untuk mengetik surat dan laporan.",
+                "jawaban": true
               },
               {
-                "kiri": "Blok kode",
-                "kanan": "Kumpulan perintah disusun seperti puzzle"
+                "teks": "Fitur Italic digunakan untuk memiringkan tulisan.",
+                "jawaban": true
               },
               {
-                "kiri": "Pengondisian",
-                "kanan": "Mengambil keputusan tergantung syarat"
+                "teks": "Microsoft Word hanya dapat digunakan untuk menggambar.",
+                "jawaban": false
               }
             ],
-            "bobot": 3
+            "bobot": 6
+          },
+          {
+            "id": "s17",
+            "jenis": "benarsalah",
+            "teks": "Program Pengolah Data: tentukan apakah setiap pernyataan berikut Benar atau Salah!",
+            "pernyataan": [
+              {
+                "teks": "Microsoft Excel dapat digunakan untuk membuat grafik dari data.",
+                "jawaban": true
+              },
+              {
+                "teks": "Pada Excel, kolom ditandai dengan huruf dan baris ditandai dengan angka.",
+                "jawaban": true
+              },
+              {
+                "teks": "Microsoft Excel hanya dapat digunakan untuk mengetik surat.",
+                "jawaban": false
+              }
+            ],
+            "bobot": 6
+          },
+          {
+            "id": "s18",
+            "jenis": "benarsalah",
+            "teks": "Dasar Pemrograman: tentukan apakah setiap pernyataan berikut Benar atau Salah!",
+            "pernyataan": [
+              {
+                "teks": "Langkah-langkah membuat mi instan dapat disebut contoh algoritma.",
+                "jawaban": true
+              },
+              {
+                "teks": "Algoritma tidak perlu disusun berurutan.",
+                "jawaban": false
+              },
+              {
+                "teks": "Urutan langkah yang salah dapat menghasilkan hasil yang berbeda.",
+                "jawaban": true
+              }
+            ],
+            "bobot": 6
+          },
+          {
+            "id": "s19",
+            "jenis": "benarsalah",
+            "teks": "Pemrograman Scratch: tentukan apakah setiap pernyataan berikut Benar atau Salah!",
+            "pernyataan": [
+              {
+                "teks": "Program di Scratch dibuat dengan menyusun blok-blok perintah.",
+                "jawaban": true
+              },
+              {
+                "teks": "Blok Turn 15 Degrees digunakan untuk memutar karakter.",
+                "jawaban": true
+              },
+              {
+                "teks": "Blok When Green Flag Clicked digunakan untuk menutup aplikasi Scratch.",
+                "jawaban": false
+              }
+            ],
+            "bobot": 6
+          },
+          {
+            "id": "s20",
+            "jenis": "benarsalah",
+            "teks": "Konsep Dasar Pemrograman: tentukan apakah setiap pernyataan berikut Benar atau Salah!",
+            "pernyataan": [
+              {
+                "teks": "Selection adalah konsep percabangan berdasarkan suatu kondisi.",
+                "jawaban": true
+              },
+              {
+                "teks": "Sequence adalah konsep menjalankan instruksi tanpa urutan.",
+                "jawaban": false
+              },
+              {
+                "teks": "Looping digunakan untuk mengulang perintah.",
+                "jawaban": true
+              }
+            ],
+            "bobot": 6
+          },
+          {
+            "id": "s21",
+            "jenis": "menjodohkan",
+            "teks": "Program Pengolah Kata pada menu Insert dalam menyisipkan objek: jodohkan setiap istilah dengan penjelasan yang tepat!",
+            "pasangan": [
+              {
+                "kiri": "Table",
+                "kanan": "Menyisipkan tabel"
+              },
+              {
+                "kiri": "Picture",
+                "kanan": "Menyisipkan gambar dari file di komputer"
+              },
+              {
+                "kiri": "Text Box",
+                "kanan": "Menyisipkan kotak teks"
+              }
+            ],
+            "bobot": 6
+          },
+          {
+            "id": "s22",
+            "jenis": "menjodohkan",
+            "teks": "Program Pengolah Data: jodohkan setiap istilah dengan penjelasan yang tepat!",
+            "pasangan": [
+              {
+                "kiri": "Worksheet",
+                "kanan": "Lembar kerja tempat data ditulis"
+              },
+              {
+                "kiri": "Column",
+                "kanan": "Deretan sel ke arah vertikal yang ditandai huruf"
+              },
+              {
+                "kiri": "Row",
+                "kanan": "Deretan sel ke arah horizontal yang ditandai angka"
+              }
+            ],
+            "bobot": 6
+          },
+          {
+            "id": "s23",
+            "jenis": "menjodohkan",
+            "teks": "Dasar Pemrograman: jodohkan setiap istilah dengan penjelasan yang tepat!",
+            "pasangan": [
+              {
+                "kiri": "Algoritma",
+                "kanan": "Urutan langkah untuk menyelesaikan masalah"
+              },
+              {
+                "kiri": "Bug",
+                "kanan": "Kesalahan pada program"
+              },
+              {
+                "kiri": "Debugging",
+                "kanan": "Proses mencari dan memperbaiki kesalahan program"
+              }
+            ],
+            "bobot": 6
+          },
+          {
+            "id": "s24",
+            "jenis": "menjodohkan",
+            "teks": "Pemrograman Scratch: jodohkan setiap istilah dengan penjelasan yang tepat!",
+            "pasangan": [
+              {
+                "kiri": "Turn 15 Degrees",
+                "kanan": "Memutar karakter sebesar 15 derajat"
+              },
+              {
+                "kiri": "Wait 1 Seconds",
+                "kanan": "Memberi jeda selama 1 detik"
+              },
+              {
+                "kiri": "Repeat 10",
+                "kanan": "Mengulang perintah sebanyak 10 kali"
+              }
+            ],
+            "bobot": 6
+          },
+          {
+            "id": "s25",
+            "jenis": "menjodohkan",
+            "teks": "Konsep Dasar Pemrograman: jodohkan setiap istilah dengan contoh yang tepat!",
+            "pasangan": [
+              {
+                "kiri": "Input",
+                "kanan": "Angka yang diketik oleh pengguna"
+              },
+              {
+                "kiri": "Process",
+                "kanan": "Penjumlahan dua angka oleh program"
+              },
+              {
+                "kiri": "Output",
+                "kanan": "Hasil penjumlahan yang tampil di layar"
+              }
+            ],
+            "bobot": 6
           }
         ]
       }
